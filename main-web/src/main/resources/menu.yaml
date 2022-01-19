@@ -1,0 +1,38 @@
+menus:
+  # 홈페이지
+  - id: home
+    pageUrl: /home
+    title: Home
+  # front 변경에 관련된 메뉴
+  - id: change.frontend
+    pageUrl: /change/frontend
+    title: "front 변경"
+    menus:
+      # front만 변경됨
+      - id: frontend.only
+        pageUrl: /change/frontendonly
+        title: "front만 변경"
+      # front & backend 변경됨
+      - id: frontend.and.backend
+        pageUrl: /change/frontandbackend
+        title: "front와 backend 변경"
+  - id: menu2
+    pageUrl: /page/page2
+    menus:
+      - id: menu21
+        pageUrl: /page/page21
+      - id: menu22
+        roles: role2, role3
+        pageUrl: /page/page22
+      - id: menu23
+        pageUrl: /page/page23
+  - id: menu3
+    pageUrl: /page/page3
+    roles: role3
+    menus:
+      - id: menu31
+        pageUrl: /page/page31
+      - id: menu32
+        pageUrl: /page/page32
+      - id: menu33
+        pageUrl: /page/page33

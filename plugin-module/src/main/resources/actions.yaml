@@ -1,0 +1,13 @@
+actions:
+  # 메뉴에 보이며 메뉴에 연결된 페이지가 있는 경우
+  - name: "sample-hello"
+    description: "간단하게 hello를 출력한다."
+    page: "/sample/hello"
+    menu:
+      id: "plugin.sample.hello"
+      # 메뉴 위치는 가장 상단 좌측인 경우 "top-first", 상단 우측인 경우 "top-last", 특정 메뉴 다음인 경우는 해당 메뉴의 id
+      location: "top-last"
+  # 메뉴없이 페이지만 있는 경우
+  - name:
+    description:
+    page:

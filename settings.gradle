@@ -1,0 +1,6 @@
+rootProject.name = 'example-plugin'
+include 'main-domain'
+include 'main-application'
+include 'main-web'
+include 'plugin-module'
+

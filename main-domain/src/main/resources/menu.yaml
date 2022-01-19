@@ -1,0 +1,31 @@
+menus:
+  - id: menu1
+    pageUrl: /page/page1
+    menus:
+    - id: menu11
+      roles: role1, role2
+      pageUrl: /page/page11
+    - id: menu12
+      pageUrl: /page/page12
+    - id: menu13
+      pageUrl: /page/page13
+  - id: menu2
+    pageUrl: /page/page2
+    menus:
+      - id: menu21
+        pageUrl: /page/page21
+      - id: menu22
+        roles: role2, role3
+        pageUrl: /page/page22
+      - id: menu23
+        pageUrl: /page/page23
+  - id: menu3
+    pageUrl: /page/page3
+    roles: role3
+    menus:
+      - id: menu31
+        pageUrl: /page/page31
+      - id: menu32
+        pageUrl: /page/page32
+      - id: menu33
+        pageUrl: /page/page33
