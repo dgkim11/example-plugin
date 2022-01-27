@@ -1,0 +1,7 @@
+roles:
+  - name: user
+    description : user description
+  - name: operator
+    description: operator description
+  - name: admin
+    description: admin description

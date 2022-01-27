@@ -62,8 +62,8 @@ public class MenuService {
                 .roles(roleSet)
                 .menuList(menuList)
                 .bundleBaseName(MENU_MESSAGE_BASE)
-                .title(Optional.ofNullable(menuInfo.getTitle()))
-                .titleKey(Optional.ofNullable(menuInfo.getTitleKey()))
+                .menuName(Optional.ofNullable(menuInfo.getTitle()))
+                .menuBundleKey(Optional.ofNullable(menuInfo.getTitleKey()))
                 .build();
     }
 

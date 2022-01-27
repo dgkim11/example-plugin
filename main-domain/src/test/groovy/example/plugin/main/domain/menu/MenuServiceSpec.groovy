@@ -28,10 +28,10 @@ class MenuServiceSpec extends Specification {
         List<Menu> menuList = sut.getAllMenuList()
 
         then:
-        menuList.get(0).getMenuList().get(0).getTitle(Locale.KOREA) == "페이지11.한글"
-        menuList.get(1).getTitle(Locale.KOREA) == "페이지2.한글"
-        menuList.get(1).getMenuList().get(0).getTitle(Locale.KOREA) == "페이지22.한글"
-        menuList.get(2).getTitle(Locale.KOREA) == "페이지3.한글"
+        menuList.get(0).getMenuList().get(0).getMenuName(Locale.KOREA) == "페이지11.한글"
+        menuList.get(1).getMenuName(Locale.KOREA) == "페이지2.한글"
+        menuList.get(1).getMenuList().get(0).getMenuName(Locale.KOREA) == "페이지22.한글"
+        menuList.get(2).getMenuName(Locale.KOREA) == "페이지3.한글"
     }
 
     def "메뉴에 title 속성이 없고 locale이 영어인 경우 영어 메세지를 보여준다."()    {
@@ -39,10 +39,10 @@ class MenuServiceSpec extends Specification {
         List<Menu> menuList = sut.getAllMenuList()
 
         then:
-        menuList.get(0).getMenuList().get(0).getTitle(Locale.KOREA) == "페이지11.한글"
-        menuList.get(1).getTitle(Locale.KOREA) == "페이지2.한글"
-        menuList.get(1).getMenuList().get(0).getTitle(Locale.KOREA) == "페이지22.한글"
-        menuList.get(2).getTitle(Locale.KOREA) == "페이지3.한글"
+        menuList.get(0).getMenuList().get(0).getMenuName(Locale.KOREA) == "페이지11.한글"
+        menuList.get(1).getMenuName(Locale.KOREA) == "페이지2.한글"
+        menuList.get(1).getMenuList().get(0).getMenuName(Locale.KOREA) == "페이지22.한글"
+        menuList.get(2).getMenuName(Locale.KOREA) == "페이지3.한글"
     }
 
     def "메뉴에 title 속성이 있는 경우 locale에 상관없이 title 메세지를 보여준다."()   {
@@ -50,8 +50,8 @@ class MenuServiceSpec extends Specification {
         List<Menu> menuList = sut.getAllMenuList()
 
         then:
-        menuList.get(0).getTitle(Locale.KOREA) == "페이지1"
-        menuList.get(2).getMenuList().get(0).getTitle(Locale.KOREA) == "페이지31"
+        menuList.get(0).getMenuName(Locale.KOREA) == "페이지1"
+        menuList.get(2).getMenuList().get(0).getMenuName(Locale.KOREA) == "페이지31"
     }
 
     def "title, titleKey 모두 없으면 title은 menuId가 기본 값이 된다."() {
@@ -59,6 +59,6 @@ class MenuServiceSpec extends Specification {
         List<Menu> menuList = sut.getAllMenuList()
 
         then:
-        menuList.get(1).getMenuList().get(2).getTitle(Locale.KOREA) == "menu23"
+        menuList.get(1).getMenuList().get(2).getMenuName(Locale.KOREA) == "menu23"
     }
 }

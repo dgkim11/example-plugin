@@ -22,13 +22,13 @@ menus:
       - id: menu21
         pageUrl: /page/page21
       - id: menu22
-        roles: role2, role3
+        roles: admin, operator
         pageUrl: /page/page22
       - id: menu23
         pageUrl: /page/page23
   - id: menu3
     pageUrl: /page/page3
-    roles: role3
+    roles: operator
     menus:
       - id: menu31
         pageUrl: /page/page31

@@ -1,4 +1,7 @@
 actions:
+  # 메인 애플리케이션에 있는 메뉴를 overriding한다.
+  - name: "home"
+    page: "/custom/home"
   # 메뉴에 보이며 메뉴에 연결된 페이지가 있는 경우
   - name: "sample-hello"
     description: "간단하게 hello를 출력한다."

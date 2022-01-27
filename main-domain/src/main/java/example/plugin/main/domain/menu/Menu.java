@@ -33,8 +33,14 @@ public class Menu {
 
     @NonNull
     private String bundleBaseName;
-    private Optional<String> title;
-    private Optional<String> titleKey;
+    /**
+     *  메뉴 리스트에서 보여질 메뉴명
+     */
+    private Optional<String> menuName;
+    /**
+     * i18n 지원을 위해서 resource bundle에 있는 메세지 key.
+     */
+    private Optional<String> menuBundleKey;
 
     public Menu deepClone() {
         List<Menu> clonedMenuList = new ArrayList<>();
@@ -45,18 +51,18 @@ public class Menu {
                 .roles(new HashSet<>(roles))
                 .menuList(clonedMenuList)
                 .bundleBaseName(bundleBaseName)
-                .title(title)
-                .titleKey(titleKey)
+                .menuName(menuName)
+                .menuBundleKey(menuBundleKey)
                 .build();
     }
 
-    public String getTitle()    {
-        return getTitle(Locale.getDefault());
+    public String getMenuName()    {
+        return getMenuName(Locale.getDefault());
     }
 
-    public String getTitle(Locale locale)    {
-        if(title.isPresent()) return title.get();
-        return titleKey.map(s -> ResourceBundle.getBundle(bundleBaseName, locale).getString(s)).orElseGet(() -> id);
+    public String getMenuName(Locale locale)    {
+        if(menuName.isPresent()) return menuName.get();
+        return menuBundleKey.map(s -> ResourceBundle.getBundle(bundleBaseName, locale).getString(s)).orElseGet(() -> id);
     }
 
     public boolean isAccessable(Role role)  {
