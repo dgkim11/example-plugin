@@ -25,8 +25,8 @@ public class MenuMaker {
             // Menu 객체 원본을 수정하면 role별로 메뉴를 구성할 때 데이터가 꼬인다. 따라서, 원본 객체를 deep clone하여 사용한다.
             Menu clonedMenu = menu.deepClone();
             if(menu.isAccessable(role)) menuListByRole.add(clonedMenu);
-            if(! clonedMenu.getMenuList().isEmpty())  {
-                clonedMenu.setMenuList(getMenuListByRole(role, clonedMenu.getMenuList()));
+            if(! clonedMenu.getSubMenuList().isEmpty())  {
+                clonedMenu.setSubMenuList(getMenuListByRole(role, clonedMenu.getSubMenuList()));
             }
         }
         return menuListByRole;

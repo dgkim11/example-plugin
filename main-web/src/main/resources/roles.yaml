@@ -1,7 +1,13 @@
 roles:
-  - name: user
+  - id: user
+    name: 사용자
+    nameBundleKey: ...
     description : user description
-  - name: operator
+  - id: operator
+    name: 운영자
+    nameBundleKey: ...
     description: operator description
-  - name: admin
+  - id: admin
+    name: 관리자
+    nameBundleKey: ...
     description: admin description

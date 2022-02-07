@@ -1,7 +1,7 @@
 package example.plugin.main.web.webconfig;
 
-import example.plugin.main.application.security.auth.FormAuthenticationProvider;
-import example.plugin.main.application.security.auth.LoginSuccessHandler;
+import example.plugin.main.web.security.auth.FormAuthenticationProvider;
+import example.plugin.main.web.security.auth.LoginSuccessHandler;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,21 +10,25 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailsService userDetailsService;
-    private PasswordEncoder passwordEncoder;
 
-    public SecurityConfig(UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
+    public SecurityConfig(UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
-        this.passwordEncoder = passwordEncoder;
     }
 
     @Bean
-    public AuthenticationProvider authenticationProvider()  {
+    public AuthenticationProvider authenticationProvider(PasswordEncoder passwordEncoder)  {
         return new FormAuthenticationProvider(userDetailsService, passwordEncoder);
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder()    {
+        return new BCryptPasswordEncoder();
     }
 
     @Override
@@ -42,10 +46,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .successHandler(new LoginSuccessHandler("/home"))
-                .and()
+            .and()
             .logout()
                 .logoutUrl("/doLogout")
-                .logoutSuccessUrl("/logout");
+                .logoutSuccessUrl("/login")
+                .invalidateHttpSession(true);
     }
 
     @Override

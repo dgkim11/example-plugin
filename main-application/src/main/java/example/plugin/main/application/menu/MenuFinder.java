@@ -37,7 +37,7 @@ public class MenuFinder {
         if(user.isEmpty()) throw new RuntimeException("해당 사용자를 찾을 수 없습니다. userId:" + userId);
 
         Set<String> roleNames = roleSetByMenu.get(menuId);
-        if(! isAccessable(roleNames, user.get().getRoleName()))
+        if(! isAccessable(roleNames, user.get().getRoleId()))
             throw new NotAccessableMenuException("can't access the menu for the user. menuId:" + menuId + "userId:" + userId);
 
         return menuMap.get(menuId);
@@ -47,7 +47,7 @@ public class MenuFinder {
     public List<Menu> findMenuListByUser(String userId) {
         Optional<User> user = userRepository.findById(userId);
         if(user.isEmpty()) return Collections.emptyList();
-        return menuService.findMenuListByRole(user.get().getRoleName());
+        return menuService.findMenuListByRole(user.get().getRoleId());
     }
 
     public List<Menu> findMenuListByRole(String roleName) {
@@ -83,8 +83,8 @@ public class MenuFinder {
             menuMap.put(menu.getId(), menu);
 
             // 하위 sub menu들에 대해서 recursive하게 메뉴별 role 구성
-            if(! menu.getMenuList().isEmpty())  {
-                makeRoleSetByMenu(menu.getRoles(), menu.getMenuList());
+            if(! menu.getSubMenuList().isEmpty())  {
+                makeRoleSetByMenu(menu.getRoles(), menu.getSubMenuList());
             }
         }
     }

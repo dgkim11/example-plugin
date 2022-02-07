@@ -1,4 +1,4 @@
-package example.plugin.main.application.security.auth;
+package example.plugin.main.web.security.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

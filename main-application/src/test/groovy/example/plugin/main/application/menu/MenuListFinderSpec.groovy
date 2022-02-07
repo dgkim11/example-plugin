@@ -38,8 +38,8 @@ class MenuListFinderSpec extends Specification  {
 
         then: "명시적인 role이 없거나, 자신이 role이 포함된 메뉴만 갖는다."
         menuList.size() == 2
-        menuList.get(0).getMenuList().size() == 3
-        menuList.get(1).getMenuList().size() == 2
+        menuList.get(0).getSubMenuList().size() == 3
+        menuList.get(1).getSubMenuList().size() == 2
         // role1은 아래와 같은 메뉴 구성을 갖는다.
         //        - id: menu1
         //          pageUrl: /page/page1
@@ -65,8 +65,8 @@ class MenuListFinderSpec extends Specification  {
 
         then: "명시적인 role이 없거나, 자신이 role이 포함된 메뉴만 갖는다."
         menuList.size() == 2
-        menuList.get(0).getMenuList().size() == 3
-        menuList.get(1).getMenuList().size() == 3
+        menuList.get(0).getSubMenuList().size() == 3
+        menuList.get(1).getSubMenuList().size() == 3
         // role2은 아래와 같은 메뉴 구성을 갖는다.
         //        - id: menu1
         //          pageUrl: /page/page1
@@ -94,9 +94,9 @@ class MenuListFinderSpec extends Specification  {
 
         then: "명시적인 role이 없거나, 자신이 role이 포함된 메뉴만 갖는다."
         menuList.size() == 3
-        menuList.get(0).getMenuList().size() == 2
-        menuList.get(1).getMenuList().size() == 3
-        menuList.get(2).getMenuList().size() == 3
+        menuList.get(0).getSubMenuList().size() == 2
+        menuList.get(1).getSubMenuList().size() == 3
+        menuList.get(2).getSubMenuList().size() == 3
 //  role3은 아래와 같은 메뉴 구성을 갖는다.
 //        menus:
 //            - id: menu1

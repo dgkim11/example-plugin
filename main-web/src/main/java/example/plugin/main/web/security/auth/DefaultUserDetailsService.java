@@ -1,8 +1,7 @@
-package example.plugin.main.application.security.auth;
+package example.plugin.main.web.security.auth;
 
 import example.plugin.main.domain.user.User;
 import example.plugin.main.domain.user.UserRepository;
-import example.plugin.main.application.hook.ApplicationHookService;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,11 +15,9 @@ import java.util.Optional;
 
 @Service
 public class DefaultUserDetailsService implements UserDetailsService {
-    private final ApplicationHookService hookService;
     private final UserRepository userRepository;
 
-    public DefaultUserDetailsService(ApplicationHookService hookService, UserRepository userRepository) {
-        this.hookService = hookService;
+    public DefaultUserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -30,11 +27,7 @@ public class DefaultUserDetailsService implements UserDetailsService {
         if(userOptional.isEmpty()) throw new UsernameNotFoundException("can't find user. loginId:" + loginId);
         User user = userOptional.get();
         List<GrantedAuthority> authorityList = new ArrayList<>();
-        authorityList.add((new SimpleGrantedAuthority(user.getRoleName())));
+        authorityList.add((new SimpleGrantedAuthority(user.getRoleId())));
         return new org.springframework.security.core.userdetails.User(user.getLoginId(), user.getPassword(), authorityList);
-//        LoginHook loginHook = new LoginHook(loginId, password);
-//        if(! hookService.beforeEventHooker(loginHook)) return new User()
-//
-//        hookService.afterEventHooker(loginHook);
     }
 }

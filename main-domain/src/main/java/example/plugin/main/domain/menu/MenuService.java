@@ -1,6 +1,7 @@
 package example.plugin.main.domain.menu;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import example.plugin.main.domain.page.AuthorizedPageService;
 import example.plugin.main.domain.role.RoleService;
 import org.springframework.stereotype.Service;
 
@@ -19,22 +20,24 @@ import example.plugin.main.domain.role.Role;
 @Service
 public class MenuService {
     private List<Menu> allMenuList;
-    private Map<String, List<Menu>> menuListByRoleName = new HashMap<>();
+    private Map<String, List<Menu>> menuListByRolId = new HashMap<>();
     private ObjectMapper objectMapper;
     private RoleService roleService;
-    private static final String MENU_MESSAGE_BASE = "messages.messages_menu";
+    private AuthorizedPageService authPageService;
+
     private static final String MENU_FILE = "/menu.yaml";
 
-    public MenuService(RoleService roleService, ObjectMapper objectMapper) {
+    public MenuService(RoleService roleService, AuthorizedPageService authPageService, ObjectMapper objectMapper) {
         this.roleService = roleService;
         this.objectMapper = objectMapper;
+        this.authPageService = authPageService;
     }
 
     @PostConstruct
     public void makeMenus() throws IOException, URISyntaxException {
         MenuConfig menuConfig;
 
-        InputStream in = MenuService.class.getClassLoader().getResourceAsStream(MENU_FILE);
+        InputStream in = this.getClass().getClassLoader().getResourceAsStream(MENU_FILE);
         if(in == null)  {
             File file = new File(getClass().getResource(MENU_FILE).toURI());
             menuConfig = objectMapper.readValue(file, MenuConfig.class);
@@ -42,7 +45,17 @@ public class MenuService {
             menuConfig = objectMapper.readValue(in, MenuConfig.class);
         }
         allMenuList = convertToMenuList(menuConfig);
-        menuListByRoleName = MenuMaker.makeMenuListByRole(roleService.getAllRoles(), allMenuList);
+        menuListByRolId = MenuMaker.makeMenuListByRole(roleService.getAllRoles(), allMenuList);
+
+        registerAuthorizedPages(allMenuList);
+    }
+
+    private void registerAuthorizedPages(List<Menu> allMenuList) {
+        allMenuList.forEach(menu -> {
+            if (! menu.getRoles().isEmpty()) {
+                authPageService.addPage(menu.getPageUrl(), menu.getRoles());
+            }
+        });
     }
 
     private List<Menu> convertToMenuList(MenuConfig menuConfig) {
@@ -54,16 +67,15 @@ public class MenuService {
 
     private Menu convertToMenu(MenuInfo menuInfo) {
         Set<Role> roleSet = makeRoleSet(menuInfo.getRoles());
-        List<Menu> menuList = menuInfo.getMenus().stream().map(m -> convertToMenu(m)).collect(Collectors.toList());
+        List<Menu> menuList = menuInfo.getSubMenu().stream().map(m -> convertToMenu(m)).collect(Collectors.toList());
 
         return Menu.builder()
                 .id(menuInfo.getId())
                 .pageUrl(menuInfo.getPageUrl())
                 .roles(roleSet)
-                .menuList(menuList)
-                .bundleBaseName(MENU_MESSAGE_BASE)
-                .menuName(Optional.ofNullable(menuInfo.getTitle()))
-                .menuBundleKey(Optional.ofNullable(menuInfo.getTitleKey()))
+                .subMenuList(menuList)
+                .menuName(menuInfo.getMenuName())
+                .menuBundleKey(menuInfo.getMenuBundleKey())
                 .build();
     }
 
@@ -83,9 +95,9 @@ public class MenuService {
         return allMenuList;
     }
 
-    public List<Menu> findMenuListByRole(String roleName) {
-        List<Menu> list = menuListByRoleName.get(roleName);
-        if(list == null) throw new RuntimeException("해당 role의 메뉴가 존재하지 않습니다. roleName:" + roleName);
+    public List<Menu> findMenuListByRole(String roleId) {
+        List<Menu> list = menuListByRolId.get(roleId);
+        if(list == null) throw new RuntimeException("해당 role의 메뉴가 존재하지 않습니다. roleName:" + roleId);
         return list;
     }
 }

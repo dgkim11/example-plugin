@@ -19,7 +19,7 @@ public class User {
     private Long userId;
     private String loginId;
     private String password;
-    private String roleName;
+    private String roleId;
 
     public User(String loginId, String password) {
         this.loginId = loginId;
@@ -29,6 +29,6 @@ public class User {
     public User(String loginId, String password, String roleName) {
         this.loginId = loginId;
         this.password = password;
-        this.roleName = roleName;
+        this.roleId = roleName;
     }
 }

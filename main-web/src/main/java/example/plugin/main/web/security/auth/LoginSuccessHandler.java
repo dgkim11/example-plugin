@@ -1,4 +1,4 @@
-package example.plugin.main.application.security.auth;
+package example.plugin.main.web.security.auth;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;

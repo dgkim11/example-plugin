@@ -15,14 +15,14 @@ public class MenuInfo {
      * 메뉴를 클릭하였을 때 이동할 page url.
      */
     private String pageUrl;
-    private String title;
+    private String menuName;
     /**
      * i8n을 지원하기 위해서 titleKey가 있는 경우 title 대신에 message bundle에 있는 key값을 넣는다.
      */
-    private String titleKey;
+    private String menuBundleKey;
     private String roles;
     /**
      * 하위 menu
      */
-    private List<MenuInfo> menus = new ArrayList<>();
+    private List<MenuInfo> subMenu = new ArrayList<>();
 }
