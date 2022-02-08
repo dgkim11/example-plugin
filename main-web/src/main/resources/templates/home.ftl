@@ -15,7 +15,7 @@
             <li>pageUrl: ${(item.pageUrl)!"empty"}</li>
             <li>menuName: <@spring.messageText item.menuBundleKey!"" item.menuName!""/></li>
             <li>subMenuList</li>
-            <@displayMenu item.getSubMenuList />
+            <@displayMenu item.subMenuList />
         </ul>
     </#list>
 </#macro>

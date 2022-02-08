@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @Service
 public class RoleService {
     private ObjectMapper objectMapper;
-    private Map<String, Role> roleByNameMap = new HashMap<>();
+    private Map<String, Role> roleByIdMap = new HashMap<>();
     private static final String ROLE_FILE = "/roles.yaml";
 
     public RoleService(ObjectMapper objectMapper) {
@@ -44,21 +44,21 @@ public class RoleService {
 
     private void convertToRolesMap(RoleConfig roleConfig) {
         for(RoleInfo roleInfo : roleConfig.getRoles())  {
-            roleByNameMap.put(roleInfo.getName(), convertToRole(roleInfo));
+            roleByIdMap.put(roleInfo.getId(), convertToRole(roleInfo));
         }
     }
 
     private Role convertToRole(RoleInfo roleInfo) {
-        return new Role(roleInfo.getName(), roleInfo.getDescription());
+        return new Role(roleInfo.getId(), roleInfo.getName(), roleInfo.getNameBundleKey(), roleInfo.getDescription());
     }
 
-    public Role getRole(String roleName) {
-        Role role = roleByNameMap.get(roleName);
-        if(role == null) throw new RuntimeException("찾을 수 없는 role. roleName:" + roleName);
+    public Role getRole(String roleId) {
+        Role role = roleByIdMap.get(roleId);
+        if(role == null) throw new RuntimeException("찾을 수 없는 role. roleName:" + roleId);
         return role;
     }
 
     public List<Role> getAllRoles() {
-        return roleByNameMap.values().stream().collect(Collectors.toList());
+        return roleByIdMap.values().stream().collect(Collectors.toList());
     }
 }

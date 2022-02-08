@@ -1,44 +1,44 @@
 menus:
-  - id: menu1
-    pageUrl: /page/page1
-    title: 페이지1
-    titleKey: menu.page1
-    menus:
-    - id: menu11
-      roles: role1, role2
-      pageUrl: /page/page11
-      titleKey: menu.page11
-    - id: menu12
-      pageUrl: /page/page12
-      title: 페이지12
-    - id: menu13
-      pageUrl: /page/page13
-      title: 페이지13
+  # 홈페이지
+  - id: home
+    pageUrl: /home
+    menuBundleKey: menu.home
+  # front 변경에 관련된 메뉴
+  - id: change.frontend
+    pageUrl: /change/frontend
+    menuName: "front 변경"
+    subMenu:
+      # front만 변경됨
+      - id: frontend.only
+        pageUrl: /change/frontendonly
+        menuName: "front만 변경"
+      # front & backend 변경됨
+      - id: frontend.and.backend
+        pageUrl: /change/frontandbackend
+        menuName: "front와 backend 변경"
   - id: menu2
     pageUrl: /page/page2
-    titleKey: menu.page2
-    menus:
+    subMenu:
       - id: menu21
         pageUrl: /page/page21
-        titleKey: menu.page22
+        menuBundleKey: menu.menu21
       - id: menu22
-        roles: role2, role3
+        roles: admin, operator
         pageUrl: /page/page22
-        title: 페이지22
+        menuBundleKey: menu.menu22
       - id: menu23
         pageUrl: /page/page23
+        menuBundleKey: menu.menu23
   - id: menu3
     pageUrl: /page/page3
-    titleKey: menu.page3
-    roles: role3
-    menus:
+    roles: operator
+    subMenu:
       - id: menu31
         pageUrl: /page/page31
-        title: 페이지31
-        titleKey: menu.page31
+        menuBundleKey: menu.menu31
       - id: menu32
         pageUrl: /page/page32
-        title: 페이지32
+        menuBundleKey: menu.menu32
       - id: menu33
         pageUrl: /page/page33
-        title: 페이지33
+        menuBundleKey: menu.menu33

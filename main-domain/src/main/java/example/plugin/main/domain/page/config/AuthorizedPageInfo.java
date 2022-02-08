@@ -6,6 +6,5 @@ import lombok.Getter;
 public class AuthorizedPageInfo {
     private String url;
     private String name;
-    private String description;
     private String roles;
 }

@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.LocaleResolver;
@@ -28,20 +29,16 @@ import java.util.Properties;
 @Import(ApplicationConfig.class)
 public class MainWebAppConfig implements WebMvcConfigurer {
     private UserRepository userRepository;
-    private PasswordEncoder passwordEncoder;
     private AuthorizedPageService authorizedPageService;
 
-    public MainWebAppConfig(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorizedPageService authorizedPageService) {
+    public MainWebAppConfig(UserRepository userRepository, AuthorizedPageService authorizedPageService) {
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
         this.authorizedPageService = authorizedPageService;
     }
 
-    @PostConstruct
-    public void createUsers()   {
-        userRepository.save(new User("user1", passwordEncoder.encode("password1"), "admin"));
-        userRepository.save(new User("user2", passwordEncoder.encode("password2"), "user"));
-        userRepository.save(new User("user3", passwordEncoder.encode("password3"), "operator"));
+    @Bean
+    public PasswordEncoder passwordEncoder()    {
+        return new BCryptPasswordEncoder();
     }
 
     @Bean

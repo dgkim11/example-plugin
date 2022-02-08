@@ -14,7 +14,7 @@ public class MenuMaker {
     public static Map<String, List<Menu>> makeMenuListByRole(List<Role> roles, List<Menu> menuList) {
         Map<String, List<Menu>> menuListByRole = new HashMap<>();
         for(Role role : roles)   {
-            menuListByRole.put(role.getName(), getMenuListByRole(role, menuList));
+            menuListByRole.put(role.getId(), getMenuListByRole(role, menuList));
         }
         return menuListByRole;
     }

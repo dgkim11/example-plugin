@@ -26,11 +26,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new FormAuthenticationProvider(userDetailsService, passwordEncoder);
     }
 
-    @Bean
-    public PasswordEncoder passwordEncoder()    {
-        return new BCryptPasswordEncoder();
-    }
-
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
         http

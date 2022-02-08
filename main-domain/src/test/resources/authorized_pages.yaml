@@ -1,0 +1,10 @@
+pages:
+  - url: /admin/page
+    name: admin 페이지
+    roles: admin
+  - url: /operator/page
+    name: operator 페이지
+    roles: operator
+  - url: /someone/page
+    name: operator, admin 페이지
+    roles: operator, admin

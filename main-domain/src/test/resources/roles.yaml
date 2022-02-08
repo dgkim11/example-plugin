@@ -1,7 +1,10 @@
 roles:
-  - name: role1
-    description : role1 description
-  - name: role2
-    description: role2 description
-  - name: role3
-    description: role3 description
+  - id: user
+    name: 사용자
+    description : user description
+  - id: operator
+    name: 운영자
+    description: operator description
+  - id: admin
+    name: 관리자
+    description: admin description

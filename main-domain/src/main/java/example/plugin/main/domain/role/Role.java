@@ -8,8 +8,10 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(of = {"name"})
+@EqualsAndHashCode(of = {"id"})
 public class Role {
+    private String id;
     private String name;
+    private String nameBundleKey;
     private String description;
 }

@@ -13,8 +13,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Import(DomainConfig.class)
 @ComponentScan(basePackageClasses = {Applications.class})
 public class ApplicationConfig {
-    @Bean
-    public PasswordEncoder passwordEncoder()    {
-        return new BCryptPasswordEncoder();
-    }
+//    @Bean
+//    public PasswordEncoder passwordEncoder()    {
+//        return new BCryptPasswordEncoder();
+//    }
 }
